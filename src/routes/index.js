@@ -1,12 +1,10 @@
 import { Router } from "express";
 import authRouter from "./auth.js";
-import {
-  allowCORSMiddleware,
-  loggingMiddleware,
-} from "../utils/middlewares.js";
 import userRouter from "./user.js";
 import categoryRouter from "./category.js";
 import subCategoryRouter from "./subCategory.js";
+import { loggingMiddleware } from "../middlewares/logging.js";
+import { allowCORSMiddleware } from "../middlewares/allowCORS.js";
 
 const router = Router();
 

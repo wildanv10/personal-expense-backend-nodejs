@@ -1,10 +1,8 @@
 import express from "express";
 import { UserSchema } from "../mongoose/schemas/user.js";
 import { checkSession } from "../middlewares/checkSession.js";
-import {
-  allowCORSMiddleware,
-  loggingMiddleware,
-} from "../utils/middlewares.js";
+import { loggingMiddleware } from "../middlewares/logging.js";
+import { allowCORSMiddleware } from "../middlewares/allowCORS.js";
 
 const router = express.Router();
 

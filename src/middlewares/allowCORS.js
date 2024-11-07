@@ -1,8 +1,3 @@
-export const loggingMiddleware = (request, response, next) => {
-  console.log(`${request.method} - ${request.url}`);
-  next();
-};
-
 export const allowCORSMiddleware = (allowCors) => {
   return (request, response, next) => {
     if (allowCors) {
