@@ -1,0 +1,44 @@
+# Ignore build and distribution directories
+build
+dist
+
+# Ignore node_modules
+node_modules
+
+# Ignore lock and log files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Ignore coverage output (e.g., for Jest)
+coverage
+
+# Ignore public directory (for built front-end apps)
+public
+
+# Ignore environment files
+.env
+.env.* # e.g., .env.production, .env.development
+
+# Ignore documentation build outputs
+docs
+
+# Ignore bundler outputs
+*.bundle.js
+
+# Ignore minified assets and static files
+*.min.js
+*.min.css
+*.svg
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.ico
+
+# Ignore specific file extensions
+*.log
+*.md # If markdown files should not be formatted
