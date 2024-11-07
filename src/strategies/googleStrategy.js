@@ -1,6 +1,6 @@
 import passport from "passport";
 import { Strategy } from "passport-google-oauth20";
-import { GoogleUser } from "../mongoose/schemas/googleUser.js";
+import { UserSchema } from "../mongoose/schemas/user.js";
 
 passport.serializeUser((user, done) => {
   console.log(`Inside Serialize User`);
@@ -9,7 +9,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const findUser = await GoogleUser.findById(id);
+    const findUser = await UserSchema.findById(id);
     return findUser ? done(null, findUser) : done(null, null);
   } catch (err) {
     done(err, null);
@@ -30,17 +30,17 @@ export default passport.use(
 
       let findUser;
       try {
-        findUser = await GoogleUser.findOne({ googleId: profile.id });
+        findUser = await UserSchema.findOne({ email: profile._json.email });
       } catch (err) {
         return done(err, null);
       }
       try {
-        console.log("profile.id", profile.id);
+        console.log("profile email:", profile._json.email);
 
         if (!findUser) {
-          const newUser = new GoogleUser({
-            googleId: profile.id,
+          const newUser = new UserSchema({
             email: profile._json.email,
+            name: profile.displayName,
           });
           const newSavedUser = await newUser.save();
           return done(null, newSavedUser);
