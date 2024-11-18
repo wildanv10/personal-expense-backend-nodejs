@@ -29,14 +29,14 @@ export function createApp() {
   app.use(passport.initialize());
   app.use(passport.session());
 
-  app.use(router);
-
   app.use(
     cors({
       origin: process.env.CLIENT_URL,
       credentials: true,
     }),
   );
+
+  app.use(router);
 
   return app;
 }
