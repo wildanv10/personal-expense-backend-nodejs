@@ -46,15 +46,48 @@ transactionRouter.post("/", async (req, res) => {
   }
 });
 
-// Read All Transactions (for the logged-in user using session)
+// Read All Transactions within a month (for the logged-in user using session)
+/**
+ * @route GET /api/transactions
+ * @description Get transactions filtered by month and year
+ * @query month (required) - The month to filter transactions (1-12)
+ * @query year (required) - The year to filter transactions
+ */
 transactionRouter.get("/", async (req, res) => {
+  const { month, year } = req.query;
+
+  // Validate query parameters
+  if (!month || !year) {
+    return res.status(400).json({ message: "Month and year are required." });
+  }
+
+  const numericMonth = parseInt(month, 10);
+  const numericYear = parseInt(year, 10);
+
+  if (
+    isNaN(numericMonth) ||
+    isNaN(numericYear) ||
+    numericMonth < 1 ||
+    numericMonth > 12
+  ) {
+    return res.status(400).json({ message: "Invalid month or year provided." });
+  }
+
   try {
+    // Start and end date range for the given month and year
+    const startDate = new Date(numericYear, numericMonth - 1, 1);
+    const endDate = new Date(numericYear, numericMonth, 0, 23, 59, 59, 999);
+
+    // Fetch transactions for the authenticated user within the date range
     const transactions = await TransactionSchema.find({
-      user_id: req.user._id,
+      user_id: req.user.id,
+      date: { $gte: startDate, $lte: endDate },
     });
-    res.json(transactions);
+
+    res.status(200).json(transactions);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error("Error fetching transactions:", error);
+    res.status(500).json({ message: "Server error." });
   }
 });
 
