@@ -19,7 +19,7 @@ authRouter.get(
     console.log(req.session);
     console.log(req.user);
 
-    res.sendStatus(200);
+    res.redirect(process.env.CLIENT_URL);
   },
 );
 
