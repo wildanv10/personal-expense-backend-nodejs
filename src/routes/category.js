@@ -30,11 +30,9 @@ router.post("/category/seed", async (req, res) => {
   }
 });
 
-router.get("/category/type/:categoryType", async (req, res) => {
+router.get("/category", async (req, res) => {
   try {
-    const categories = await CategorySchema.find({
-      type: req.params.categoryType,
-    });
+    const categories = await CategorySchema.find({});
     res.status(200).json(categories);
   } catch (error) {
     res.status(400).json({ error: error.message });
