@@ -9,6 +9,11 @@ import { allowCORSMiddleware } from "../middlewares/allowCORS.js";
 
 const router = Router();
 
+// welcome page
+router.get("/", (req, res) => {
+  res.status(200).send("Welcome!");
+});
+
 // /api/auth
 router.use(
   "/api/auth",
