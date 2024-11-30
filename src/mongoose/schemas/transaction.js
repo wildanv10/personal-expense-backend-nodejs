@@ -46,7 +46,7 @@ const transactionSchema = new mongoose.Schema(
         "BCA BLU - Transfer",
         "UOB - QRIS",
         "UOB - Transfer",
-        "Shopee Pay",
+        "ShopeePay",
         "GoPay",
       ],
     },
