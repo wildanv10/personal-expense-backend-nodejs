@@ -23,6 +23,7 @@ export function createApp() {
     limit: 20,
   });
   app.use(limiter);
+  app.set("trust proxy", 1);
 
   app.use(
     session({
@@ -48,6 +49,9 @@ export function createApp() {
   );
 
   app.use(router);
+  app.get("/ip", (request, response) => {
+    response.send(request.ip);
+  });
 
   return app;
 }
