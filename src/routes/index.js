@@ -19,8 +19,8 @@ router.use(
 
 // /api/user
 router.use("/api/user", userRouter);
-router.use("/api/user", categoryRouter);
-router.use("/api/user", subCategoryRouter);
+router.use("/api", categoryRouter);
+router.use("/api", subCategoryRouter);
 
 // /api/transaction
 router.use("/api/transactions", transactionRouter);
