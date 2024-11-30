@@ -2,19 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "src/index.js",
+      "src": "index.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/src/index.js"
+      "dest": "index.js"
     }
-  ],
-  "env": {
-    "MONGODB_CONNECT": "@mongodb_connect",
-    "PORT": "8080",
-    "CLIENT_URL": "@client_url"
-  }
+  ]
 }
