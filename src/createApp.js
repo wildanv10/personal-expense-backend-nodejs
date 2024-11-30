@@ -31,10 +31,11 @@ export function createApp() {
       saveUninitialized: true,
       resave: false,
       cookie: {
+        domain: ".vercel.app",
         maxAge: 60000 * 60 * 24,
         httpOnly: true,
         secure: true,
-        sameSite: "none",
+        sameSite: "lax",
       },
       store: MongoStore.create({
         client: mongoose.connection.getClient(),
