@@ -41,6 +41,19 @@ export default passport.use(
           const newUser = new UserSchema({
             email: profile._json.email,
             name: profile.displayName,
+            payment_methods: [
+              "Cash",
+              "BCA - Virtual Account",
+              "BCA - QRIS",
+              "BCA - Transfer",
+              "BCA BLU - Virtual Account",
+              "BCA BLU - QRIS",
+              "BCA BLU - Transfer",
+              "UOB - QRIS",
+              "UOB - Transfer",
+              "ShopeePay",
+              "GoPay",
+            ],
           });
           const newSavedUser = await newUser.save();
           return done(null, newSavedUser);
