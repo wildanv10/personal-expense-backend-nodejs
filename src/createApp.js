@@ -48,8 +48,19 @@ export function createApp() {
     cors({
       origin: process.env.CLIENT_URL,
       credentials: true,
+      allowedHeaders: ["Content-Type", "Authorization"],
     }),
   );
+
+  app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", process.env.CLIENT_URL);
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "Content-Type, Authorization",
+    );
+    next();
+  });
 
   app.use(router);
   app.get("/ip", (request, response) => {
