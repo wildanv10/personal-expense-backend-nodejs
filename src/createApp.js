@@ -35,7 +35,7 @@ export function createApp() {
         maxAge: 60000 * 60 * 24,
         httpOnly: true,
         secure: true,
-        sameSite: "lax",
+        sameSite: "none",
       },
       store: MongoStore.create({
         client: mongoose.connection.getClient(),
@@ -52,16 +52,7 @@ export function createApp() {
       allowedHeaders: ["Content-Type", "Authorization"],
     }),
   );
-
-  app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", process.env.CLIENT_URL);
-    res.setHeader("Access-Control-Allow-Credentials", "true");
-    res.setHeader(
-      "Access-Control-Allow-Headers",
-      "Content-Type, Authorization",
-    );
-    next();
-  });
+  app.options("*", cors());
 
   app.use(router);
   app.get("/ip", (request, response) => {
