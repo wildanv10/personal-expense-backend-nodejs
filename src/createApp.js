@@ -31,7 +31,7 @@ export function createApp() {
       saveUninitialized: true,
       resave: false,
       cookie: {
-        domain: ".vercel.app",
+        domain: ".codealchemy.site",
         maxAge: 60000 * 60 * 24,
         httpOnly: true,
         secure: true,
