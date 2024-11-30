@@ -11,6 +11,9 @@
     "mongoose",
     "passport"
   ],
+  "engines": {
+    "node": ">=20.17.0"
+  },
   "license": "ISC",
   "main": "index.js",
   "scripts": {
