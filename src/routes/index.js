@@ -6,6 +6,7 @@ import categoryRouter from "./category.js";
 import transactionRouter from "./transaction.js";
 import { loggingMiddleware } from "../middlewares/logging.js";
 import { allowCORSMiddleware } from "../middlewares/allowCORS.js";
+import budgetRouter from "./budget.js";
 
 const router = Router();
 
@@ -26,6 +27,7 @@ router.use(
 router.use("/api/user", userRouter);
 router.use("/api", categoryRouter);
 // router.use("/api", subCategoryRouter);
+router.use("/api", budgetRouter);
 
 // /api/transaction
 router.use("/api/transactions", transactionRouter);
