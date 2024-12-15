@@ -18,12 +18,14 @@ export function createApp() {
   app.use(helmet());
   app.use(express.json());
 
-  const limiter = rateLimit({
-    windowMs: 1 * 60 * 1000, // 1 minute
-    limit: 20,
-  });
-  app.use(limiter);
-  app.set("trust proxy", 1);
+  if (process.env.NODE_ENV !== "development") {
+    const limiter = rateLimit({
+      windowMs: 1 * 60 * 1000, // 1 minute
+      limit: 20,
+    });
+    app.use(limiter);
+    app.set("trust proxy", 1);
+  }
 
   app.use(
     session({
@@ -32,10 +34,10 @@ export function createApp() {
       resave: false,
       cookie: {
         domain: ".codealchemy.site",
-        maxAge: 60000 * 60 * 24,
-        httpOnly: true,
-        secure: true,
-        sameSite: "none",
+        maxAge: Number(process.env.COOKIE_MAX_AGE),
+        httpOnly: Boolean(process.env.COOKIE_HTTP_ONLY),
+        secure: Boolean(process.env.COOKIE_SECURE),
+        sameSite: process.env.COOKIE_SAME_SITE,
       },
       store: MongoStore.create({
         client: mongoose.connection.getClient(),
