@@ -22,7 +22,7 @@
     "lint:fix": "eslint . --fix",
     "prettier:fix": "prettier . --write",
     "format": "pnpm run prettier:fix && pnpm run lint:fix",
-    "serve": "nodemon ./src/index.js",
+    "serve": "SET \"NODE_ENV=development\" && nodemon ./src/index.js",
     "start": "nodemon ./src/index.js"
   },
   "type": "module",
